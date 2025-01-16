@@ -18,3 +18,12 @@ build/
 *.log
 npm-debug.log*
 
+# Uploads / runtime
+server/public/*
+!server/public/.gitkeep
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
