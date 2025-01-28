@@ -30,3 +30,13 @@ const interviewSchema = new mongoose.Schema({
     mode:{
         type:String,
         enum:["HR" ,"Technical"],
+        required:true
+    },
+    resumeText:{
+     type:String
+    },
+    questions:[questionsSchema],
+
+    finalScore: { type: Number, default: 0 },
+
+    status: {
