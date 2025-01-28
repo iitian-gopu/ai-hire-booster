@@ -40,3 +40,13 @@ const interviewSchema = new mongoose.Schema({
     finalScore: { type: Number, default: 0 },
 
     status: {
+      type: String,
+      enum: ["Incompleted", "completed"],
+      default: "Incompleted",
+    }
+},{timestamps:true})
+
+const Interview = mongoose.model("Interview" , interviewSchema)
+
+
+export default Interview
