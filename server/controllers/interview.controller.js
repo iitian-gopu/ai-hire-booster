@@ -44,3 +44,49 @@ Return strictly JSON:
   "role": "string",
   "experience": "string",
   "projects": ["project1", "project2"],
+  "skills": ["skill1", "skill2"]
+}
+`
+      },
+      {
+        role: "user",
+        content: resumeText
+      }
+    ];
+
+
+    const aiResponse = await askAi(messages)
+
+    const parsed = JSON.parse(aiResponse);
+
+    fs.unlinkSync(filepath)
+
+
+    res.json({
+      role: parsed.role,
+      experience: parsed.experience,
+      projects: parsed.projects,
+      skills: parsed.skills,
+      resumeText
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    if (req.file && fs.existsSync(req.file.path)) {
+      fs.unlinkSync(req.file.path);
+    }
+
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+
+export const generateQuestion = async (req, res) => {
+  try {
+    let { role, experience, mode, resumeText, projects, skills } = req.body
+
+    role = role?.trim();
+    experience = experience?.trim();
+    mode = mode?.trim();
+
