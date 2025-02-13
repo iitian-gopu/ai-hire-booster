@@ -90,3 +90,49 @@ export const generateQuestion = async (req, res) => {
     experience = experience?.trim();
     mode = mode?.trim();
 
+    if (!role || !experience || !mode) {
+      return res.status(400).json({ message: "Role, Experience and Mode are required." })
+    }
+
+    const user = await User.findById(req.userId)
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found."
+      });
+    }
+
+    if (user.credits < 50) {
+      return res.status(400).json({
+        message: "Not enough credits. Minimum 50 required."
+      });
+    }
+
+    const projectText = Array.isArray(projects) && projects.length
+      ? projects.join(", ")
+      : "None";
+
+    const skillsText = Array.isArray(skills) && skills.length
+      ? skills.join(", ")
+      : "None";
+
+    const safeResume = resumeText?.trim() || "None";
+
+    const userPrompt = `
+    Role:${role}
+    Experience:${experience}
+    InterviewMode:${mode}
+    Projects:${projectText}
+    Skills:${skillsText},
+    Resume:${safeResume}
+    `;
+
+    if (!userPrompt.trim()) {
+      return res.status(400).json({
+        message: "Prompt content is empty."
+      });
+    }
+
+    const messages = [
+
+      {
