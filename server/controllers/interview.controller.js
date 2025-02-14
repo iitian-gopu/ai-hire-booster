@@ -228,3 +228,49 @@ export const submitAnswer = async (req, res) => {
     const { interviewId, questionIndex, answer, timeTaken } = req.body
 
     const interview = await Interview.findById(interviewId)
+    const question = interview.questions[questionIndex]
+
+    // If no answer
+    if (!answer) {
+      question.score = 0;
+      question.feedback = "You did not submit an answer.";
+      question.answer = "";
+
+      await interview.save();
+
+      return res.json({
+        feedback: question.feedback
+      });
+    }
+
+    // If time exceeded
+    if (timeTaken > question.timeLimit) {
+      question.score = 0;
+      question.feedback = "Time limit exceeded. Answer not evaluated.";
+      question.answer = answer;
+
+      await interview.save();
+
+      return res.json({
+        feedback: question.feedback
+      });
+    }
+
+
+    const messages = [
+      {
+        role: "system",
+        content: `
+You are a professional human interviewer evaluating a candidate's answer in a real interview.
+
+Evaluate naturally and fairly, like a real person would.
+
+Score the answer in these areas (0 to 10):
+
+1. Confidence – Does the answer sound clear, confident, and well-presented?
+2. Communication – Is the language simple, clear, and easy to understand?
+3. Correctness – Is the answer accurate, relevant, and complete?
+
+Rules:
+- Be realistic and unbiased.
+- Do not give random high scores.
