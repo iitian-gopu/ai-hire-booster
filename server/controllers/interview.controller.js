@@ -182,3 +182,49 @@ Make questions based on the candidate’s role, experience,interviewMode, projec
 
     }
 
+    const questionsArray = aiResponse
+      .split("\n")
+      .map(q => q.trim())
+      .filter(q => q.length > 0)
+      .slice(0, 5);
+
+    if (questionsArray.length === 0) {
+      
+      return res.status(500).json({
+        message: "AI failed to generate questions."
+      });
+    }
+
+    user.credits -= 50;
+    await user.save();
+
+    const interview = await Interview.create({
+      userId: user._id,
+      role,
+      experience,
+      mode,
+      resumeText: safeResume,
+      questions: questionsArray.map((q, index) => ({
+        question: q,
+        difficulty: ["easy", "easy", "medium", "medium", "hard"][index],
+        timeLimit: [60, 60, 90, 90, 120][index],
+      }))
+    })
+
+    res.json({
+      interviewId: interview._id,
+      creditsLeft: user.credits,
+      userName: user.name,
+      questions: interview.questions
+    });
+  } catch (error) {
+    return res.status(500).json({message:`failed to create interview ${error}`})
+  }
+}
+
+
+export const submitAnswer = async (req, res) => {
+  try {
+    const { interviewId, questionIndex, answer, timeTaken } = req.body
+
+    const interview = await Interview.findById(interviewId)
