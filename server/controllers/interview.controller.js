@@ -274,3 +274,49 @@ Score the answer in these areas (0 to 10):
 Rules:
 - Be realistic and unbiased.
 - Do not give random high scores.
+- If the answer is weak, score low.
+- If the answer is strong and detailed, score high.
+- Consider clarity, structure, and relevance.
+
+Calculate:
+finalScore = average of confidence, communication, and correctness (rounded to nearest whole number).
+
+Feedback Rules:
+- Write natural human feedback.
+- 10 to 15 words only.
+- Sound like real interview feedback.
+- Can suggest improvement if needed.
+- Do NOT repeat the question.
+- Do NOT explain scoring.
+- Keep tone professional and honest.
+
+Return ONLY valid JSON in this format:
+
+{
+  "confidence": number,
+  "communication": number,
+  "correctness": number,
+  "finalScore": number,
+  "feedback": "short human feedback"
+}
+`
+      }
+      ,
+      {
+        role: "user",
+        content: `
+Question: ${question.question}
+Answer: ${answer}
+`
+      }
+    ];
+
+
+    const aiResponse = await askAi(messages)
+
+
+    const parsed = JSON.parse(aiResponse);
+
+    question.answer = answer;
+    question.confidence = parsed.confidence;
+    question.communication = parsed.communication;
