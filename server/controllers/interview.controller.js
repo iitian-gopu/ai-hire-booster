@@ -320,3 +320,49 @@ Answer: ${answer}
     question.answer = answer;
     question.confidence = parsed.confidence;
     question.communication = parsed.communication;
+    question.correctness = parsed.correctness;
+    question.score = parsed.finalScore;
+    question.feedback = parsed.feedback;
+    await interview.save();
+
+
+    return res.status(200).json({feedback :parsed.feedback})
+  } catch (error) {
+    return res.status(500).json({message:`failed to submit answer ${error}`})
+
+  }
+}
+
+
+export const finishInterview = async (req,res) => {
+  try {
+    const {interviewId} = req.body
+    const interview = await Interview.findById(interviewId)
+    if(!interview){
+      return res.status(400).json({message:"failed to find Interview"})
+    }
+
+    const totalQuestions = interview.questions.length;
+
+    let totalScore = 0;
+    let totalConfidence = 0;
+    let totalCommunication = 0;
+    let totalCorrectness = 0;
+
+    interview.questions.forEach((q) => {
+      totalScore += q.score || 0;
+      totalConfidence += q.confidence || 0;
+      totalCommunication += q.communication || 0;
+      totalCorrectness += q.correctness || 0;
+    });
+
+    const finalScore = totalQuestions
+      ? totalScore / totalQuestions
+      : 0;
+
+    const avgConfidence = totalQuestions
+      ? totalConfidence / totalQuestions
+      : 0;
+
+    const avgCommunication = totalQuestions
+      ? totalCommunication / totalQuestions
