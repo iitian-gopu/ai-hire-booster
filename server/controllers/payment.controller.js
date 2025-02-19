@@ -9,3 +9,14 @@ export const createOrder = async (req,res) => {
           if (!amount || !credits) {
       return res.status(400).json({ message: "Invalid plan data" });
     }
+
+     const options = {
+      amount: amount * 100, // convert to paise
+      currency: "INR",
+      receipt: `receipt_${Date.now()}`,
+    };
+
+    const order = await razorpay.orders.create(options)
+
+     await Payment.create({
+      userId: req.userId,
