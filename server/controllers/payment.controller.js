@@ -20,3 +20,14 @@ export const createOrder = async (req,res) => {
 
      await Payment.create({
       userId: req.userId,
+      planId,
+      amount,
+      credits,
+      razorpayOrderId: order.id,
+      status: "created",
+    });
+
+    return res.json(order);
+
+    
+    } catch (error) {
