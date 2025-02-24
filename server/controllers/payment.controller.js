@@ -64,3 +64,14 @@ export const verifyPayment = async (req,res) => {
     if (payment.status === "paid") {
       return res.json({ message: "Already processed" });
     }
+
+    // Update payment record
+    payment.status = "paid";
+    payment.razorpayPaymentId = razorpay_payment_id;
+    await payment.save();
+
+    // Add credits to user
+    const updatedUser = await User.findByIdAndUpdate(payment.userId, {
+      $inc: { credits: payment.credits }
+    },{new:true});
+
