@@ -75,3 +75,13 @@ export const verifyPayment = async (req,res) => {
       $inc: { credits: payment.credits }
     },{new:true});
 
+    res.json({
+      success: true,
+      message: "Payment verified and credits added",
+      user: updatedUser,
+    });
+
+    } catch (error) {
+         return res.status(500).json({message:`failed to verify Razorpay payment ${error}`})
+    }
+}
