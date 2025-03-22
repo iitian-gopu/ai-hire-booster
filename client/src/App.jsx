@@ -10,3 +10,15 @@ import InterviewPage from './pages/InterviewPage'
 import InterviewHistory from './pages/InterviewHistory'
 import Pricing from './pages/Pricing'
 import InterviewReport from './pages/InterviewReport'
+
+export const ServerUrl  = "https://interviewiqbackend-h6yh.onrender.com"
+
+function App() {
+
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    const getUser = async () => {
+      try {
+        const result = await axios.get(ServerUrl + "/api/user/current-user", {withCredentials:true})
+        dispatch(setUserData(result.data))
+      } catch (error) {
