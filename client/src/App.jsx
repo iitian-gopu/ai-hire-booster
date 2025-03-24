@@ -22,3 +22,15 @@ function App() {
         const result = await axios.get(ServerUrl + "/api/user/current-user", {withCredentials:true})
         dispatch(setUserData(result.data))
       } catch (error) {
+        console.log(error)
+        dispatch(setUserData(null))
+      }
+    }
+    getUser()
+
+  },[dispatch])
+  return (
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/auth' element={<Auth/>}/>
+      <Route path='/interview' element={<InterviewPage/>}/>
