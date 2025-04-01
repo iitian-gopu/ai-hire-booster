@@ -8,3 +8,12 @@ const firebaseConfig = {
   storageBucket: "aiinterviewer-98add.firebasestorage.app",
   messagingSenderId: "573040301522",
   appId: "1:573040301522:web:dec83e8ce6fc552c28a40b"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider()
+
+export {auth , provider}
