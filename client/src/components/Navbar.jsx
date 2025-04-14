@@ -9,3 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ServerUrl } from '../App';
 import { setUserData } from '../redux/userSlice';
+import AuthModel from './AuthModel';
+function Navbar() {
+    const {userData} = useSelector((state)=>state.user)
+    const [showCreditPopup,setShowCreditPopup] = useState(false)
+    const [showUserPopup,setShowUserPopup] = useState(false)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [showAuth, setShowAuth] = useState(false);
+
+    const handleLogout = async () => {
+        try {
