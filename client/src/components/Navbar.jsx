@@ -42,3 +42,14 @@ function Navbar() {
                     <BsRobot size={18}/>
 
                 </div>
+                <h1 className='font-semibold hidden md:block text-lg'>AI HireBooster</h1>
+            </div>
+
+            <div className='flex items-center gap-6  relative'>
+                <div className='relative'>
+                    <button onClick={()=>{
+                        if(!userData){
+                            setShowAuth(true)
+                            return;
+                        }
+                        setShowCreditPopup(!showCreditPopup);
