@@ -53,3 +53,14 @@ function Navbar() {
                             return;
                         }
                         setShowCreditPopup(!showCreditPopup);
+                        setShowUserPopup(false)
+                    }} className='flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-md hover:bg-gray-200 transition'>
+                        <BsCoin size={20}/>
+                        {userData?.credits || 0}
+                    </button>
+
+                    {showCreditPopup && (
+                        <div className='absolute right-[-50px] mt-3 w-64 bg-white shadow-xl border border-gray-200 rounded-xl p-5 z-50'>
+                            <p className='text-sm text-gray-600 mb-4'>Need more credits to continue interviews?</p>
+                            <button onClick={()=>navigate("/pricing")} className='w-full bg-black text-white py-2 rounded-lg text-sm'>Buy more credits</button>
+
