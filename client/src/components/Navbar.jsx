@@ -64,3 +64,14 @@ function Navbar() {
                             <p className='text-sm text-gray-600 mb-4'>Need more credits to continue interviews?</p>
                             <button onClick={()=>navigate("/pricing")} className='w-full bg-black text-white py-2 rounded-lg text-sm'>Buy more credits</button>
 
+                        </div>
+                    )}
+                </div>
+
+                <div className='relative'>
+                    <button
+                    onClick={()=>{
+                         if(!userData){
+                            setShowAuth(true)
+                            return;
+                        }
