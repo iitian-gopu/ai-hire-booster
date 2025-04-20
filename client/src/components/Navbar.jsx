@@ -97,3 +97,14 @@ function Navbar() {
 
             </div>
 
+
+
+        </motion.div>
+
+        {showAuth && <AuthModel onClose={()=>setShowAuth(false)}/>}
+      
+    </div>
+  )
+}
+
+export default Navbar
