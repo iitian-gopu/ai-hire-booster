@@ -53,3 +53,30 @@ function Step1SetUp({ onStart }) {
             setAnalyzing(false);
         }
     }
+
+    const handleStart = async () => {
+        setLoading(true)
+        try {
+           const result = await axios.post(ServerUrl + "/api/interview/generate-questions" , {role, experience, mode , resumeText, projects, skills } , {withCredentials:true}) 
+           console.log(result.data)
+           if(userData){
+            dispatch(setUserData({...userData , credits:result.data.creditsLeft}))
+           }
+           setLoading(false)
+           onStart(result.data)
+
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
+    }
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className='min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 px-4'>
+
+            <div className='w-full max-w-6xl bg-white rounded-3xl shadow-2xl grid md:grid-cols-2 overflow-hidden'>
+
+                <motion.div
