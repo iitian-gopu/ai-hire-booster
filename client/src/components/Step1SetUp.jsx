@@ -107,3 +107,30 @@ function Step1SetUp({ onStart }) {
                                     text: "Smart Voice Interview",
                                 },
                                 {
+                                    icon: <FaChartLine className="text-green-600 text-xl" />,
+                                    text: "Performance Analytics",
+                                },
+                            ].map((item, index) => (
+                                <motion.div key={index}
+                                    initial={{ y: 30, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.3 + index * 0.15 }}
+                                    whileHover={{ scale: 1.03 }}
+                                    className='flex items-center space-x-4 bg-white p-4 rounded-xl shadow-sm cursor-pointer'>
+                                    {item.icon}
+                                    <span className='text-gray-700 font-medium'>{item.text}</span>
+
+                                </motion.div>
+                            ))
+                        }
+                    </div>
+
+
+
+                </motion.div>
+
+
+
+                <motion.div
+                    initial={{ x: 80, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
