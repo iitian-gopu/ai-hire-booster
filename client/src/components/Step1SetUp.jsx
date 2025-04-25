@@ -188,3 +188,30 @@ function Step1SetUp({ onStart }) {
                                     onChange={(e) => setResumeFile(e.target.files[0])} />
 
                                 <p className='text-gray-600 font-medium'>
+                                    {resumeFile ? resumeFile.name : "Click to upload resume (Optional)"}
+                                </p>
+
+                                {resumeFile && (
+                                    <motion.button
+                                        whileHover={{ scale: 1.02 }}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleUploadResume()
+                                        }}
+
+                                        className='mt-4 bg-gray-900 text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition'>
+                                        {analyzing ? "Analyzing..." : "Analyze Resume"}
+
+
+
+                                    </motion.button>)}
+
+                            </motion.div>
+
+
+                        )}
+
+                        {analysisDone && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
