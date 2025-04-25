@@ -161,3 +161,30 @@ function Step1SetUp({ onStart }) {
                                 onChange={(e) => setExperience(e.target.value)} value={experience} />
 
 
+
+                        </div>
+
+                        <select value={mode}
+                            onChange={(e) => setMode(e.target.value)}
+                            className='w-full py-3 px-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 outline-none transition'>
+
+                            <option value="Technical">Technical Interview</option>
+                            <option value="HR">HR Interview</option>
+
+                        </select>
+
+                        {!analysisDone && (
+                            <motion.div
+                                whileHover={{ scale: 1.02 }}
+                                onClick={() => document.getElementById("resumeUpload").click()}
+                                className='border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-green-500 hover:bg-green-50 transition'>
+
+                                <FaFileUpload className='text-4xl mx-auto text-green-600 mb-3' />
+
+                                <input type="file"
+                                    accept="application/pdf"
+                                    id="resumeUpload"
+                                    className='hidden'
+                                    onChange={(e) => setResumeFile(e.target.files[0])} />
+
+                                <p className='text-gray-600 font-medium'>
