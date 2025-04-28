@@ -44,3 +44,48 @@ function Step2Interview({ interviewData, onFinish }) {
       // Try known female voices first
       const femaleVoice =
         voices.find(v =>
+          v.name.toLowerCase().includes("zira") ||
+          v.name.toLowerCase().includes("samantha") ||
+          v.name.toLowerCase().includes("female")
+        );
+
+      if (femaleVoice) {
+        setSelectedVoice(femaleVoice);
+        setVoiceGender("female");
+        return;
+      }
+
+      // Try known male voices
+      const maleVoice =
+        voices.find(v =>
+          v.name.toLowerCase().includes("david") ||
+          v.name.toLowerCase().includes("mark") ||
+          v.name.toLowerCase().includes("male")
+        );
+
+      if (maleVoice) {
+        setSelectedVoice(maleVoice);
+        setVoiceGender("male");
+        return;
+      }
+
+      // Fallback: first voice (assume female)
+      setSelectedVoice(voices[0]);
+      setVoiceGender("female");
+    };
+
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+  }, [])
+
+  const videoSource = voiceGender === "male" ? maleVideo : femaleVideo;
+
+
+  /* ---------------- SPEAK FUNCTION ---------------- */
+  const speakText = (text) => {
+    return new Promise((resolve) => {
+      if (!window.speechSynthesis || !selectedVoice) {
+        resolve();
+        return;
+      }
