@@ -271,3 +271,49 @@ setIsSubmitting(false)
   const handleNext =async () => {
     setAnswer("");
     setFeedback("");
+
+    if (currentIndex + 1 >= questions.length) {
+      finishInterview();
+      return;
+    }
+
+    await speakText("Alright, let's move to the next question.");
+
+    setCurrentIndex(currentIndex + 1);
+    setTimeout(() => {
+      if (isMicOn) startMic();
+    }, 500);
+
+   
+  }
+
+  const finishInterview = async () => {
+    stopMic()
+    setIsMicOn(false)
+    try {
+      const result = await axios.post(ServerUrl+ "/api/interview/finish" , { interviewId} , {withCredentials:true})
+
+      console.log(result.data)
+      onFinish(result.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+   useEffect(() => {
+    if (isIntroPhase) return;
+    if (!currentQuestion) return;
+
+    if (timeLeft === 0 && !isSubmitting && !feedback) {
+      submitAnswer()
+    }
+  }, [timeLeft]);
+
+  useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+        recognitionRef.current.abort();
+      }
+
