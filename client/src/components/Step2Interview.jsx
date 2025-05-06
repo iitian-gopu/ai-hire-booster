@@ -408,3 +408,48 @@ setIsSubmitting(false)
           <textarea
             placeholder="Type your answer here..."
             onChange={(e) => setAnswer(e.target.value)}
+            value={answer}
+            className="flex-1 bg-gray-100 p-4 sm:p-6 rounded-2xl resize-none outline-none border border-gray-200 focus:ring-2 focus:ring-emerald-500 transition text-gray-800" />
+
+
+         {!feedback ? ( <div className='flex items-center gap-4 mt-6'>
+            <motion.button
+              onClick={toggleMic}
+              whileTap={{ scale: 0.9 }}
+              className='w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-full bg-black text-white shadow-lg'>
+              {isMicOn ? <FaMicrophone size={20} /> : <FaMicrophoneSlash size={20}/>}
+            </motion.button>
+
+            <motion.button
+            onClick={submitAnswer}
+            disabled={isSubmitting}
+              whileTap={{ scale: 0.95 }}
+              className='flex-1 bg-gradient-to-r from-emerald-600 to-teal-500 text-white py-3 sm:py-4 rounded-2xl shadow-lg hover:opacity-90 transition font-semibold disabled:bg-gray-500'>
+              {isSubmitting?"Submitting...":"Submit Answer"}
+
+            </motion.button>
+
+          </div>):(
+            <motion.div 
+             initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            className='mt-6 bg-emerald-50 border border-emerald-200 p-5 rounded-2xl shadow-sm'>
+              <p className='text-emerald-700 font-medium mb-4'>{feedback}</p>
+
+              <button
+              onClick={handleNext}
+
+               className='w-full bg-gradient-to-r from-emerald-600 to-teal-500 text-white py-3 rounded-xl shadow-md hover:opacity-90 transition flex items-center justify-center gap-1'>
+                Next Question <BsArrowRight size={18}/>
+              </button>
+
+            </motion.div>
+          )}
+        </div>
+      </div>
+
+    </div>
+  )
+}
+
+export default Step2Interview
