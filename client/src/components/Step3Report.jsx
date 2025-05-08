@@ -108,3 +108,39 @@ function Step3Report({ report }) {
 
   // ================= ADVICE =================
   let advice = "";
+
+  if (finalScore >= 8) {
+    advice =
+      "Excellent performance. Maintain confidence and structure. Continue refining clarity and supporting answers with strong real-world examples.";
+  } else if (finalScore >= 5) {
+    advice =
+      "Good foundation shown. Improve clarity and structure. Practice delivering concise, confident answers with stronger supporting examples.";
+  } else {
+    advice =
+      "Significant improvement required. Focus on structured thinking, clarity, and confident delivery. Practice answering aloud regularly.";
+  }
+
+  doc.setFillColor(255, 255, 255);
+  doc.setDrawColor(220);
+  doc.roundedRect(margin, currentY, contentWidth, 35, 4, 4);
+
+  doc.setFont("helvetica", "bold");
+  doc.text("Professional Advice", margin + 10, currentY + 10);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+
+  const splitAdvice = doc.splitTextToSize(advice, contentWidth - 20);
+  doc.text(splitAdvice, margin + 10, currentY + 20);
+
+  currentY += 50;
+
+  // ================= QUESTION TABLE =================
+  autoTable(doc, {
+  startY: currentY,
+  margin: { left: margin, right: margin },
+  head: [["#", "Question", "Score", "Feedback"]],
+  body: questionWiseScore.map((q, i) => [
+    `${i + 1}`,
+    q.question,
+    `${q.score}/10`,
