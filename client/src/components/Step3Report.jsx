@@ -180,3 +180,40 @@ function Step3Report({ report }) {
             className='mt-1 p-3 rounded-full bg-white shadow hover:shadow-md transition'><FaArrowLeft className='text-gray-600' /></button>
 
           <div>
+            <h1 className='text-3xl font-bold flex-nowrap text-gray-800'>
+              Interview Analytics Dashboard
+            </h1>
+            <p className='text-gray-500 mt-2'>
+              AI-powered performance insights
+            </p>
+
+          </div>
+        </div>
+
+        <button onClick={downloadPDF} className='bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl shadow-md transition-all duration-300 font-semibold text-sm sm:text-base text-nowrap'>Download PDF</button>
+      </div>
+
+
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8'>
+
+        <div className='space-y-6'>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="bg-white rounded-2xl sm:rounded-3xl shadow-lg p-6 sm:p-8 text-center">
+
+            <h3 className="text-gray-500 mb-4 sm:mb-6 text-sm sm:text-base">
+              Overall Performance
+            </h3>
+            <div className='relative w-20 h-20 sm:w-25 sm:h-25 mx-auto'>
+              <CircularProgressbar
+                value={percentage}
+                text={`${score}/10`}
+                styles={buildStyles({
+                  textSize: "18px",
+                  pathColor: "#10b981",
+                  textColor: "#ef4444",
+                  trailColor: "#e5e7eb",
+                })}
+              />
+            </div>
