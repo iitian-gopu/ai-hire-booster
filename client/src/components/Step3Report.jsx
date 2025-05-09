@@ -144,3 +144,39 @@ function Step3Report({ report }) {
     `${i + 1}`,
     q.question,
     `${q.score}/10`,
+    q.feedback,
+  ]),
+  styles: {
+    fontSize: 9,
+    cellPadding: 5,
+    valign: "top",
+  },
+  headStyles: {
+    fillColor: [34, 197, 94],
+    textColor: 255,
+    halign: "center",
+  },
+  columnStyles: {
+    0: { cellWidth: 10, halign: "center" }, // index
+    1: { cellWidth: 55 }, // question
+    2: { cellWidth: 20, halign: "center" }, // score
+    3: { cellWidth: "auto" }, // feedback
+  },
+  alternateRowStyles: {
+    fillColor: [249, 250, 251],
+  },
+});
+
+
+  doc.save("AI_Interview_Report.pdf");
+};
+
+  return (
+    <div className='min-h-screen bg-linear-to-br from-gray-50 to-green-50 px-4 sm:px-6 lg:px-10 py-8'>
+      <div className='mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
+        <div className='md:mb-10 w-full flex items-start gap-4 flex-wrap'>
+          <button
+            onClick={() => navigate("/history")}
+            className='mt-1 p-3 rounded-full bg-white shadow hover:shadow-md transition'><FaArrowLeft className='text-gray-600' /></button>
+
+          <div>
