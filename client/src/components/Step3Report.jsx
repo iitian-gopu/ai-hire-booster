@@ -217,3 +217,39 @@ function Step3Report({ report }) {
                 })}
               />
             </div>
+
+            <p className="text-gray-400 mt-3 text-xs sm:text-sm">
+              Out of 10
+            </p>
+
+            <div className="mt-4">
+              <p className="font-semibold text-gray-800 text-sm sm:text-base">
+                {performanceText}
+              </p>
+              <p className="text-gray-500 text-xs sm:text-sm mt-1">
+                {shortTagline}
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className='bg-white rounded-2xl sm:rounded-3xl shadow-lg p-6 sm:p-8'>
+            <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-6">
+              Skill Evaluation
+            </h3>
+
+            <div className='space-y-5'>
+              {
+                skills.map((s, i) => (
+                  <div key={i}>
+                    <div className='flex justify-between mb-2 text-sm sm:text-base'>
+
+                      <span>{s.label}</span>
+                      <span className='font-semibold text-green-600'>{s.value}</span>
+                    </div>
+
+                    <div className='bg-gray-200 h-2 sm:h-3 rounded-full'>
+                      <div className='bg-green-500 h-full rounded-full'
+                        style={{ width: `${s.value * 10}%` }}
