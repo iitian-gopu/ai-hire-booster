@@ -253,3 +253,40 @@ function Step3Report({ report }) {
                     <div className='bg-gray-200 h-2 sm:h-3 rounded-full'>
                       <div className='bg-green-500 h-full rounded-full'
                         style={{ width: `${s.value * 10}%` }}
+
+                      ></div>
+
+                    </div>
+
+
+                  </div>
+                ))
+              }
+            </div>
+
+          </motion.div>
+
+
+        </div>
+
+        <div className='lg:col-span-2 space-y-6'>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className='bg-white rounded-2xl sm:rounded-3xl shadow-lg p-5 sm:p-8'>
+            <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-4 sm:mb-6">
+              Performance Trend
+            </h3>
+
+            <div className='h-64 sm:h-72'>
+
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={questionScoreData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis domain={[0, 10]} />
+                  <Tooltip />
+                  <Area type="monotone"
+                    dataKey="score"
+                    stroke="#22c55e"
