@@ -326,3 +326,39 @@ function Step3Report({ report }) {
                       </p>
                     </div>
 
+
+                    <div className='bg-green-100 text-green-600 px-3 py-1 rounded-full font-bold text-xs sm:text-sm w-fit'>
+                      {q.score ?? 0}/10
+                    </div>
+                  </div>
+
+                  <div className='bg-green-50 border border-green-200 p-4 rounded-lg'>
+                    <p className='text-xs text-green-600 font-semibold mb-1'>
+                      AI Feedback
+                    </p>
+                    <p className='text-sm text-gray-700 leading-relaxed'>
+
+                      {q.feedback && q.feedback.trim() !== ""
+                        ? q.feedback
+                        : "No feedback available for this question."}
+                    </p>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+
+          </motion.div>
+
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+  )
+}
+
+export default Step3Report
