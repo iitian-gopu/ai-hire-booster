@@ -41,3 +41,14 @@ function Auth({isModel = false}) {
         className={`
         w-full 
         ${isModel ? "max-w-md p-8 rounded-3xl" : "max-w-lg p-12 rounded-[32px]"}
+        bg-white shadow-2xl border border-gray-200
+      `}>
+            <div className='flex items-center justify-center gap-3 mb-6'>
+                <div className='bg-black text-white p-2 rounded-lg'>
+                    <BsRobot size={18}/>
+
+                </div>
+                <h2 className='font-semibold text-lg'>AI HireBooster</h2>
+            </div>
+
+            <h1 className='text-2xl md:text-3xl font-semibold text-center leading-snug mb-4'>
