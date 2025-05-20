@@ -52,3 +52,14 @@ function Auth({isModel = false}) {
             </div>
 
             <h1 className='text-2xl md:text-3xl font-semibold text-center leading-snug mb-4'>
+                Continue with
+                <span className='bg-green-100 text-green-600 px-3 py-1 rounded-full inline-flex items-center gap-2'>
+                    <IoSparkles size={16}/>
+                    AI Smart Interview
+
+                </span>
+            </h1>
+
+            <p className='text-gray-500 text-center text-sm md:text-base leading-relaxed mb-8'>
+                Sign in to start AI-powered mock interviews,
+        track your progress, and unlock detailed performance insights.
