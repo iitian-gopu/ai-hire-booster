@@ -74,3 +74,13 @@ function Auth({isModel = false}) {
                 <FcGoogle size={20}/>
                 Continue with Google
 
+   
+            </motion.button>
+        </motion.div>
+
+      
+    </div>
+  )
+}
+
+export default Auth
