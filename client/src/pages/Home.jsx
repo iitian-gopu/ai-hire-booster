@@ -61,3 +61,35 @@ function Home() {
 
             </motion.h1>
 
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className='text-gray-500 mt-6 max-w-2xl mx-auto text-lg'>
+              Role-based mock interviews with smart follow-ups,
+              adaptive difficulty and real-time performance evaluation.
+
+            </motion.p>
+
+            <div className='flex flex-wrap justify-center gap-4 mt-10'>
+              <motion.button
+                onClick={() => {
+                  if (!userData) {
+                    setShowAuth(true)
+                    return;
+                  }
+                  navigate("/interview")
+                }}
+                whileHover={{ opacity: 0.9, scale: 1.03 }}
+                whileTap={{ opacity: 1, scale: 0.98 }}
+                className='bg-black text-white px-10 py-3 rounded-full hover:opacity-90 transition shadow-md'>
+                Start Interview
+
+              </motion.button>
+
+              <motion.button
+                onClick={() => {
+                  if (!userData) {
+                    setShowAuth(true)
+                    return;
+                  }
