@@ -93,3 +93,34 @@ function Home() {
                     setShowAuth(true)
                     return;
                   }
+                  navigate("/history")
+                }}
+                whileHover={{ opacity: 0.9, scale: 1.03 }}
+                whileTap={{ opacity: 1, scale: 0.98 }}
+                className='border border-gray-300 px-10 py-3 rounded-full hover:bg-gray-100 transition'>
+                View History
+
+              </motion.button>
+            </div>
+          </div>
+
+          <div className='flex flex-col md:flex-row justify-center items-center gap-10 mb-28'>
+            {
+              [
+                {
+                  icon: <BsRobot size={24} />,
+                  step: "STEP 1",
+                  title: "Role & Experience Selection",
+                  desc: "AI adjusts difficulty based on selected job role."
+                },
+                {
+                  icon: <BsMic size={24} />,
+                  step: "STEP 2",
+                  title: "Smart Voice Interview",
+                  desc: "Dynamic follow-up questions based on your answers."
+                },
+                {
+                  icon: <BsClock size={24} />,
+                  step: "STEP 3",
+                  title: "Timer Based Simulation",
+                  desc: "Real interview pressure with time tracking."
