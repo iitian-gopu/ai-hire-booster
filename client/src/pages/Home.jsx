@@ -219,3 +219,34 @@ function Home() {
 
                   </motion.div>
                 ))
+              }
+            </div>
+
+
+          </div>
+
+          <div className='mb-32'>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className='text-4xl font-semibold text-center mb-16'>
+              Multiple Interview{" "}
+              <span className="text-green-600">Modes</span>
+
+            </motion.h2>
+
+            <div className='grid md:grid-cols-2 gap-10'>
+              {
+                [
+                  {
+                    img: hrImg,
+                    title: "HR Interview Mode",
+                    desc: "Behavioral and communication based evaluation."
+                  },
+                  {
+                    img: techImg,
+                    title: "Technical Mode",
+                    desc: "Deep technical questioning based on selected role."
+                  },
+
