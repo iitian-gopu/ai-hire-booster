@@ -250,3 +250,35 @@ function Home() {
                     desc: "Deep technical questioning based on selected role."
                   },
 
+                  {
+                    img: confidenceImg,
+                    title: "Confidence Detection",
+                    desc: "Basic tone and voice analysis insights."
+                  },
+                  {
+                    img: creditImg,
+                    title: "Credits System",
+                    desc: "Unlock premium interview sessions easily."
+                  }
+                ].map((mode, index) => (
+                  <motion.div key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ y: -6 }}
+                    className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all">
+
+                    <div className='flex items-center justify-between gap-6'>
+                      <div className="w-1/2">
+                        <h3 className="font-semibold text-xl mb-3">
+                          {mode.title}
+                        </h3>
+
+                        <p className="text-gray-500 text-sm leading-relaxed">
+                          {mode.desc}
+                        </p>
+                      </div>
+
+                      {/* RIGHT IMAGE */}
+                      <div className="w-1/2 flex justify-end">
+                        <img
