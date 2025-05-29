@@ -282,3 +282,34 @@ function Home() {
                       {/* RIGHT IMAGE */}
                       <div className="w-1/2 flex justify-end">
                         <img
+                          src={mode.img}
+                          alt={mode.title}
+                          className="w-28 h-28 object-contain"
+                        />
+                      </div>
+
+
+
+                    </div>
+
+
+                  </motion.div>
+                ))
+              }
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+
+      {showAuth && <AuthModel onClose={() => setShowAuth(false)} />}
+
+        <Footer/>
+
+    </div>
+  )
+}
+
+export default Home
