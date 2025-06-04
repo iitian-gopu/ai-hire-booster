@@ -69,3 +69,15 @@ function InterviewHistory() {
 
                                         <p className="text-gray-500 text-sm mt-1">
                                             {item.experience} • {item.mode}
+                                        </p>
+
+                                        <p className="text-xs text-gray-400 mt-2">
+                                            {new Date(item.createdAt).toLocaleDateString()}
+                                        </p>
+                                    </div>
+
+                                    <div className='flex items-center gap-6'>
+
+                                        {/* SCORE */}
+                                        <div className="text-right">
+                                            <p className="text-xl font-bold text-emerald-600">
