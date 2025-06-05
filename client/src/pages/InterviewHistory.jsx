@@ -81,3 +81,15 @@ function InterviewHistory() {
                                         {/* SCORE */}
                                         <div className="text-right">
                                             <p className="text-xl font-bold text-emerald-600">
+                                                {item.finalScore || 0}/10
+                                            </p>
+                                            <p className="text-xs text-gray-400">
+                                                Overall Score
+                                            </p>
+                                        </div>
+
+                                        {/* STATUS BADGE */}
+                                        <span
+                                            className={`px-4 py-1 rounded-full text-xs font-medium ${item.status === "completed"
+                                                    ? "bg-emerald-100 text-emerald-700"
+                                                    : "bg-yellow-100 text-yellow-700"
