@@ -93,3 +93,15 @@ function InterviewHistory() {
                                             className={`px-4 py-1 rounded-full text-xs font-medium ${item.status === "completed"
                                                     ? "bg-emerald-100 text-emerald-700"
                                                     : "bg-yellow-100 text-yellow-700"
+                                                }`}
+                                        >
+                                            {item.status}
+                                        </span>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        ))
