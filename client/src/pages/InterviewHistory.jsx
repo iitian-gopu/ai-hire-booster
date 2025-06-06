@@ -105,3 +105,14 @@ function InterviewHistory() {
                             </div>
 
                         ))
+                        }
+
+                    </div>
+                }
+            </div>
+
+        </div>
+    )
+}
+
+export default InterviewHistory
