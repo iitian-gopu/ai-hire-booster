@@ -22,3 +22,15 @@ function InterviewPage() {
                 setStep(3)
             }}
             />
+        )}
+
+          {step===3 && (
+            <Step3Report report={interviewData}/>
+        )}
+
+      
+    </div>
+  )
+}
+
+export default InterviewPage
