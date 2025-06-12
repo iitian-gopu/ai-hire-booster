@@ -21,3 +21,26 @@ function Pricing() {
       description: "Perfect for beginners starting interview preparation.",
       features: [
         "100 AI Interview Credits",
+        "Basic Performance Report",
+        "Voice Interview Access",
+        "Limited History Tracking",
+      ],
+      default: true,
+    },
+    {
+      id: "basic",
+      name: "Starter Pack",
+      price: "₹100",
+      credits: 150,
+      description: "Great for focused practice and skill improvement.",
+      features: [
+        "150 AI Interview Credits",
+        "Detailed Feedback",
+        "Performance Analytics",
+        "Full Interview History",
+      ],
+    },
+    {
+      id: "pro",
+      name: "Pro Pack",
+      price: "₹500",
