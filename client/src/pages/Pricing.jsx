@@ -44,3 +44,25 @@ function Pricing() {
       id: "pro",
       name: "Pro Pack",
       price: "₹500",
+      credits: 650,
+      description: "Best value for serious job preparation.",
+      features: [
+        "650 AI Interview Credits",
+        "Advanced AI Feedback",
+        "Skill Trend Analysis",
+        "Priority AI Processing",
+      ],
+      badge: "Best Value",
+    },
+  ];
+
+
+
+  const handlePayment = async (plan) => {
+    try {
+      setLoadingPlan(plan.id)
+
+      const amount =  
+      plan.id === "basic" ? 100 :
+      plan.id === "pro" ? 500 : 0;
+
