@@ -66,3 +66,26 @@ function Pricing() {
       plan.id === "basic" ? 100 :
       plan.id === "pro" ? 500 : 0;
 
+      const result = await axios.post(ServerUrl + "/api/payment/order" , {
+        planId: plan.id,
+        amount: amount,
+        credits: plan.credits,
+      },{withCredentials:true})
+      
+
+      const options = {
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount: result.data.amount,
+      currency: "INR",
+      name: "AI HireBooster",
+      description: `${plan.name} - ${plan.credits} Credits`,
+      order_id: result.data.id,
+
+      handler:async function (response) {
+        const verifypay = await axios.post(ServerUrl + "/api/payment/verify" ,response , {withCredentials:true})
+        dispatch(setUserData(verifypay.data.user))
+
+          alert("Payment Successful 🎉 Credits Added!");
+          navigate("/")
+
+      },
