@@ -89,3 +89,25 @@ function Pricing() {
           navigate("/")
 
       },
+      theme:{
+        color: "#10b981",
+      },
+
+      }
+
+      const rzp = new window.Razorpay(options)
+      rzp.open()
+
+      setLoadingPlan(null);
+    } catch (error) {
+     console.log(error)
+     setLoadingPlan(null);
+    }
+  }
+
+
+
+  return (
+    <div className='min-h-screen bg-gradient-to-br from-gray-50 to-emerald-50 py-16 px-6'>
+
+      <div className='max-w-6xl mx-auto mb-14 flex items-start gap-4'>
