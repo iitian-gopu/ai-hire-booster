@@ -134,3 +134,26 @@ function Pricing() {
 
           return (
             <motion.div key={plan.id}
+              whileHover={!plan.default && { scale: 1.03 }}
+              onClick={() => !plan.default && setSelectedPlan(plan.id)}
+
+              className={`relative rounded-3xl p-8 transition-all duration-300 border 
+                ${isSelected
+                  ? "border-emerald-600 shadow-2xl bg-white"
+                  : "border-gray-200 bg-white shadow-md"
+                }
+                ${plan.default ? "cursor-default" : "cursor-pointer"}
+              `}
+            >
+
+              {/* Badge */}
+              {plan.badge && (
+                <div className="absolute top-6 right-6 bg-emerald-600 text-white text-xs px-4 py-1 rounded-full shadow">
+                  {plan.badge}
+                </div>
+              )}
+
+              {/* Default Tag */}
+              {plan.default && (
+                <div className="absolute top-6 right-6 bg-gray-200 text-gray-700 text-xs px-3 py-1 rounded-full">
+                  Default
