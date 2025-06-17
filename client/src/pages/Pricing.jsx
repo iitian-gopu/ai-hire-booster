@@ -157,3 +157,25 @@ function Pricing() {
               {plan.default && (
                 <div className="absolute top-6 right-6 bg-gray-200 text-gray-700 text-xs px-3 py-1 rounded-full">
                   Default
+                </div>
+              )}
+
+              {/* Plan Name */}
+              <h3 className="text-xl font-semibold text-gray-800">
+                {plan.name}
+              </h3>
+
+              {/* Price */}
+              <div className="mt-4">
+                <span className="text-3xl font-bold text-emerald-600">
+                  {plan.price}
+                </span>
+                <p className="text-gray-500 mt-1">
+                  {plan.credits} Credits
+                </p>
+              </div>
+
+              {/* Description */}
+              <p className="text-gray-500 mt-4 text-sm leading-relaxed">
+                {plan.description}
+              </p>
