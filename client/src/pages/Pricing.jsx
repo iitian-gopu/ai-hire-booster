@@ -179,3 +179,26 @@ function Pricing() {
               <p className="text-gray-500 mt-4 text-sm leading-relaxed">
                 {plan.description}
               </p>
+
+              {/* Features */}
+              <div className="mt-6 space-y-3 text-left">
+                {plan.features.map((feature, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <FaCheckCircle className="text-emerald-500 text-sm" />
+                    <span className="text-gray-700 text-sm">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {!plan.default &&
+                <button
+                disabled={loadingPlan === plan.id}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (!isSelected) {
+                      setSelectedPlan(plan.id)
+                    } else {
+                      handlePayment(plan)
+                    }
