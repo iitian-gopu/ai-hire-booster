@@ -177,3 +177,181 @@ Input can contain:
 Role
 Experience
 Interview Mode
+Projects
+Skills
+Full Resume Text
+```
+
+GPT-4o-mini generates **exactly five personalized interview questions**.
+
+The questions follow a progressive difficulty structure:
+
+| Question   | Difficulty | Time Limit |
+| ---------- | ---------- | ---------: |
+| Question 1 | Easy       |     60 sec |
+| Question 2 | Easy       |     60 sec |
+| Question 3 | Medium     |     90 sec |
+| Question 4 | Medium     |     90 sec |
+| Question 5 | Hard       |    120 sec |
+
+This creates an interview that gradually becomes more challenging.
+
+Example:
+
+```text
+Candidate
+Role: Backend Engineer
+Experience: 3 years
+Skills: Node.js, Kafka, Redis, MongoDB
+Project: Payment Reconciliation Platform
+```
+
+The AI may generate questions around:
+
+* backend architecture
+* Node.js concurrency
+* database decisions
+* Redis caching
+* Kafka event processing
+* scaling systems
+* project trade-offs
+
+Instead of asking the same static questions to every user, the interview changes according to the candidate profile.
+
+---
+
+# 4. Technical & HR Interview Modes
+
+AI HireBooster currently supports two interview modes:
+
+### 💻 Technical Interview
+
+Designed around:
+
+* programming
+* frameworks
+* system design
+* databases
+* cloud technologies
+* project architecture
+* engineering decisions
+* debugging
+* scalability
+* candidate experience
+
+### 👔 HR Interview
+
+Designed around areas such as:
+
+* communication
+* behavioral situations
+* teamwork
+* leadership
+* conflict handling
+* strengths and weaknesses
+* career motivation
+* project ownership
+
+---
+
+# 5. Voice-Enabled AI Interviewer
+
+The interview experience combines an animated interviewer with browser speech APIs.
+
+The browser uses:
+
+```text
+SpeechSynthesis API
+```
+
+to speak questions aloud.
+
+It also uses:
+
+```text
+webkitSpeechRecognition
+```
+
+to convert spoken candidate answers into text.
+
+### Voice interaction flow
+
+```text
+AI Question
+     ↓
+Browser Speech Synthesis
+     ↓
+AI Interviewer Speaks
+     ↓
+Microphone Activated
+     ↓
+Candidate Speaks
+     ↓
+Speech Recognition
+     ↓
+Speech Converted to Text
+     ↓
+Answer Displayed in Text Area
+```
+
+Candidates can also manually edit or type their answers.
+
+The microphone can be enabled or disabled during the interview.
+
+---
+
+# 6. AI Interviewer Experience
+
+To make the interaction feel more natural, the frontend includes male and female interviewer videos.
+
+When the AI speaks:
+
+```text
+Text-to-Speech starts
+       ↓
+Interviewer video plays
+       ↓
+Microphone pauses
+       ↓
+AI completes question
+       ↓
+Video pauses
+       ↓
+Candidate microphone resumes
+```
+
+The interview begins with an AI-generated-style introduction such as:
+
+```text
+Hi [Candidate], it's great to meet you today.
+I hope you're feeling confident and ready.
+
+I'll ask you a few questions.
+Just answer naturally, and take your time.
+Let's begin.
+```
+
+This produces a more interview-like interaction than simply presenting questions on a webpage.
+
+---
+
+# 7. Timed Interview Questions
+
+Every interview question has a time limit depending on difficulty.
+
+```text
+Easy   → 60 seconds
+Medium → 90 seconds
+Hard   → 120 seconds
+```
+
+The UI displays a live countdown timer while the candidate answers.
+
+If the timer reaches zero, the current answer is automatically submitted.
+
+The backend also validates the submitted `timeTaken` against the configured question time limit.
+
+---
+
+# 8. AI Answer Evaluation
+
