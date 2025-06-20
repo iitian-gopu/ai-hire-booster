@@ -355,3 +355,181 @@ The backend also validates the submitted `timeTaken` against the configured ques
 
 # 8. AI Answer Evaluation
 
+Every submitted answer is sent to GPT-4o-mini for evaluation.
+
+The AI evaluates three dimensions.
+
+### Confidence
+
+Evaluates whether the candidate sounds:
+
+* clear
+* confident
+* structured
+* professionally presented
+
+### Communication
+
+Evaluates:
+
+* clarity
+* simplicity
+* answer structure
+* readability
+* ease of understanding
+
+### Correctness
+
+Evaluates:
+
+* technical accuracy
+* relevance
+* completeness
+* whether the answer actually addresses the question
+
+Each dimension is scored from:
+
+```text
+0 → 10
+```
+
+The final question score is calculated from the evaluation dimensions.
+
+Example AI response:
+
+```json
+{
+  "confidence": 8,
+  "communication": 7,
+  "correctness": 9,
+  "finalScore": 8,
+  "feedback": "Strong technical explanation, but structure the response more clearly."
+}
+```
+
+The score and feedback are stored with the interview in MongoDB.
+
+---
+
+# 9. Immediate Feedback
+
+After answering each question, candidates receive concise AI feedback.
+
+Example:
+
+```text
+Good explanation, but include a concrete example to strengthen your answer.
+```
+
+The feedback is also spoken aloud by the AI interviewer before the candidate moves to the next question.
+
+---
+
+# 10. Performance Analytics Dashboard
+
+After completing all questions, the backend calculates the candidate's overall performance.
+
+Metrics include:
+
+```text
+Overall Score
+Average Confidence
+Average Communication
+Average Correctness
+Question-wise Score
+Question-wise Feedback
+```
+
+The frontend visualizes the results using:
+
+* circular progress indicators
+* skill progress bars
+* question performance charts
+* individual question cards
+* AI feedback panels
+
+---
+
+# 11. Performance Trend Visualization
+
+Question scores are visualized using **Recharts**.
+
+Example:
+
+```text
+Score
+10 |
+ 9 |                  ●
+ 8 |       ●
+ 7 |             ●
+ 6 |  ●
+ 5 |
+   +-------------------------
+      Q1  Q2  Q3  Q4  Q5
+```
+
+This helps candidates identify whether their performance improves or declines as questions become more difficult.
+
+---
+
+# 12. Question-Wise Breakdown
+
+The final report retains information for each question:
+
+```text
+Question
+Difficulty
+Time Limit
+Candidate Answer
+Confidence Score
+Communication Score
+Correctness Score
+Final Score
+AI Feedback
+```
+
+This makes it easier to identify exactly where improvement is required.
+
+---
+
+# 13. PDF Report Export
+
+Candidates can download their interview analytics as a PDF.
+
+The report is generated in the browser using:
+
+* jsPDF
+* jspdf-autotable
+
+The PDF contains:
+
+```text
+AI Interview Performance Report
+
+Final Score
+
+Confidence
+Communication
+Correctness
+
+Professional Advice
+
+Question-by-Question Analysis
+
+Question
+Score
+AI Feedback
+```
+
+This allows candidates to save and compare their interview performance over time.
+
+---
+
+# 14. Interview History
+
+Every interview is persisted in MongoDB.
+
+Users can access an Interview History page containing:
+
+* role
+* experience
