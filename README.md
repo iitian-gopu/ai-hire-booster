@@ -533,3 +533,181 @@ Users can access an Interview History page containing:
 
 * role
 * experience
+* interview mode
+* date
+* final score
+* interview status
+
+Example:
+
+```text
+Backend Engineer
+3 Years • Technical
+10 Aug 2026
+8.2 / 10
+Completed
+```
+
+Selecting an interview opens its complete analytics report.
+
+---
+
+# 15. Credit-Based Interview System
+
+AI HireBooster uses a credit system to manage interview usage.
+
+Every new user starts with:
+
+```text
+100 credits
+```
+
+Starting an AI interview currently requires:
+
+```text
+50 credits
+```
+
+Therefore a new user can complete approximately:
+
+```text
+100 / 50 = 2 interviews
+```
+
+before purchasing additional credits.
+
+The credit balance is stored directly with the user in MongoDB.
+
+---
+
+# 16. Razorpay Payments
+
+Users can purchase additional interview credits through Razorpay.
+
+Current credit packs presented by the application are:
+
+| Plan         | Price | Credits |
+| ------------ | ----: | ------: |
+| Free         |    ₹0 |     100 |
+| Starter Pack |  ₹100 |     150 |
+| Pro Pack     |  ₹500 |     650 |
+
+### Payment flow
+
+```text
+User Selects Plan
+       ↓
+React Frontend
+       ↓
+POST /api/payment/order
+       ↓
+Express Backend
+       ↓
+Razorpay Order Created
+       ↓
+Razorpay Checkout
+       ↓
+Payment Completed
+       ↓
+Payment ID + Order ID + Signature
+       ↓
+POST /api/payment/verify
+       ↓
+HMAC SHA-256 Signature Verification
+       ↓
+Payment Marked Paid
+       ↓
+Credits Added to User
+```
+
+Payment information is also stored in MongoDB.
+
+---
+
+# 🧠 Complete Application Flow
+
+```mermaid
+flowchart TD
+
+A[User Opens AI HireBooster] --> B[Google Authentication]
+
+B --> C[Firebase Google Sign-In]
+
+C --> D[Express Backend]
+D --> E[MongoDB User]
+D --> F[JWT Session]
+
+F --> G[Interview Setup]
+
+G --> H{Upload Resume?}
+
+H -->|Yes| I[Multer PDF Upload]
+I --> J[pdfjs-dist Text Extraction]
+J --> K[GPT-4o-mini Resume Analysis]
+K --> L[Extract Role Experience Projects Skills]
+
+H -->|No| M[Manual Role & Experience]
+L --> N[Generate Interview]
+M --> N
+
+N --> O[OpenRouter GPT-4o-mini]
+O --> P[Generate 5 Questions]
+
+P --> Q[Deduct 50 Credits]
+Q --> R[Create MongoDB Interview]
+
+R --> S[AI Voice Interview]
+
+S --> T[Speech Synthesis Reads Question]
+T --> U[Candidate Answers]
+U --> V[Speech Recognition / Typed Input]
+
+V --> W[Submit Answer]
+W --> X[GPT-4o-mini Evaluation]
+
+X --> Y[Confidence Score]
+X --> Z[Communication Score]
+X --> AA[Correctness Score]
+X --> AB[AI Feedback]
+
+AB --> AC{More Questions?}
+
+AC -->|Yes| T
+AC -->|No| AD[Finish Interview]
+
+AD --> AE[Calculate Final Scores]
+AE --> AF[Save Interview]
+
+AF --> AG[Analytics Dashboard]
+AG --> AH[Interview History]
+AG --> AI[Download PDF Report]
+```
+
+---
+
+# 🏗️ High-Level Architecture
+
+```text
+┌─────────────────────────────────────────────┐
+│                React Frontend               │
+│                                             │
+│ React 19                                    │
+│ Vite                                        │
+│ Tailwind CSS                                │
+│ Redux Toolkit                               │
+│ React Router                                │
+│ Motion                                      │
+│ Recharts                                    │
+│ jsPDF                                       │
+└───────────────────┬─────────────────────────┘
+                    │ HTTPS / REST
+                    │ Cookies
+                    ▼
+┌─────────────────────────────────────────────┐
+│            Node.js / Express API            │
+│                                             │
+│ Authentication                              │
+│ Resume Processing                           │
+│ Interview Generation                        │
+│ Answer Evaluation                           │
+│ Interview History                           │
