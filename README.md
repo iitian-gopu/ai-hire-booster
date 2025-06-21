@@ -711,3 +711,181 @@ AG --> AI[Download PDF Report]
 │ Interview Generation                        │
 │ Answer Evaluation                           │
 │ Interview History                           │
+│ Payments                                    │
+│ Credit Management                           │
+└───────┬──────────────┬───────────────┬──────┘
+        │              │               │
+        ▼              ▼               ▼
+┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+│   MongoDB    │ │  OpenRouter  │ │   Razorpay   │
+│              │ │              │ │              │
+│ Users        │ │ GPT-4o-mini  │ │ Orders       │
+│ Interviews   │ │ Resume AI    │ │ Payments     │
+│ Payments     │ │ Interview AI │ │ Verification │
+└──────────────┘ └──────────────┘ └──────────────┘
+
+        ▲
+        │
+┌─────────────────┐
+│    Firebase     │
+│ Google Sign-In  │
+└─────────────────┘
+```
+
+---
+
+# 🛠️ Technology Stack
+
+## Frontend
+
+| Technology                 | Purpose                       |
+| -------------------------- | ----------------------------- |
+| React 19                   | Frontend UI                   |
+| Vite                       | Development and build tooling |
+| JavaScript                 | Application logic             |
+| Tailwind CSS               | Responsive UI styling         |
+| Redux Toolkit              | Global user state             |
+| React Router               | Client-side navigation        |
+| Axios                      | Backend API communication     |
+| Firebase Auth              | Google authentication         |
+| Motion                     | UI animations                 |
+| Recharts                   | Analytics visualization       |
+| React Circular Progressbar | Score visualization           |
+| jsPDF                      | PDF generation                |
+| jspdf-autotable            | Report tables                 |
+| React Icons                | UI icons                      |
+| Web Speech API             | AI voice output               |
+| Webkit Speech Recognition  | Voice-to-text answers         |
+
+---
+
+## Backend
+
+| Technology    | Purpose                                          |
+| ------------- | ------------------------------------------------ |
+| Node.js       | Backend runtime                                  |
+| Express 5     | REST API                                         |
+| MongoDB       | Application database                             |
+| Mongoose      | MongoDB ODM                                      |
+| JWT           | Session authentication                           |
+| Cookie Parser | Authentication cookie parsing                    |
+| Multer        | Resume uploads                                   |
+| pdfjs-dist    | PDF text extraction                              |
+| Axios         | OpenRouter communication                         |
+| OpenRouter    | LLM gateway                                      |
+| GPT-4o-mini   | Resume analysis, questions and answer evaluation |
+| Razorpay      | Payment processing                               |
+| Node Crypto   | Payment signature verification                   |
+| CORS          | Cross-origin frontend access                     |
+
+---
+
+# 🗄️ Database Design
+
+## User
+
+```text
+User
+├── name
+├── email
+├── credits
+├── createdAt
+└── updatedAt
+```
+
+Default credits:
+
+```text
+100
+```
+
+---
+
+## Interview
+
+```text
+Interview
+├── userId
+├── role
+├── experience
+├── mode
+├── resumeText
+├── questions[]
+│   ├── question
+│   ├── difficulty
+│   ├── timeLimit
+│   ├── answer
+│   ├── feedback
+│   ├── score
+│   ├── confidence
+│   ├── communication
+│   └── correctness
+├── finalScore
+├── status
+├── createdAt
+└── updatedAt
+```
+
+---
+
+## Payment
+
+A payment record links a Razorpay order to:
+
+```text
+User
+Plan
+Amount
+Credits
+Razorpay Order
+Razorpay Payment
+Payment Status
+```
+
+After successful signature verification, credits are added to the associated user.
+
+---
+
+# 🌐 REST API
+
+Backend routes are grouped into four API modules.
+
+```text
+/api/auth
+/api/user
+/api/interview
+/api/payment
+```
+
+---
+
+## Authentication APIs
+
+### Google Authentication
+
+```http
+POST /api/auth/google
+```
+
+Creates or retrieves the user and establishes an authenticated session.
+
+---
+
+### Logout
+
+```http
+GET /api/auth/logout
+```
+
+Clears the authentication session.
+
+---
+
+# User APIs
+
+### Current User
+
+```http
+GET /api/user/current-user
+```
+
