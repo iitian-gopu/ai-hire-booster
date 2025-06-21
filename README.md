@@ -889,3 +889,182 @@ Clears the authentication session.
 GET /api/user/current-user
 ```
 
+Requires authentication.
+
+Returns the currently authenticated user and current credit balance.
+
+---
+
+# Interview APIs
+
+### Analyze Resume
+
+```http
+POST /api/interview/resume
+```
+
+Authentication required.
+
+Request:
+
+```text
+multipart/form-data
+resume: PDF file
+```
+
+Response:
+
+```json
+{
+  "role": "Software Engineer",
+  "experience": "3 years",
+  "projects": [],
+  "skills": [],
+  "resumeText": "..."
+}
+```
+
+---
+
+### Generate Questions
+
+```http
+POST /api/interview/generate-questions
+```
+
+Authentication required.
+
+Example request:
+
+```json
+{
+  "role": "Backend Engineer",
+  "experience": "3 years",
+  "mode": "Technical",
+  "resumeText": "...",
+  "projects": [
+    "Payment Reconciliation Platform"
+  ],
+  "skills": [
+    "Node.js",
+    "Kafka",
+    "Redis"
+  ]
+}
+```
+
+Example response:
+
+```json
+{
+  "interviewId": "...",
+  "creditsLeft": 50,
+  "userName": "Candidate",
+  "questions": [
+    {
+      "question": "...",
+      "difficulty": "easy",
+      "timeLimit": 60
+    }
+  ]
+}
+```
+
+---
+
+### Submit Answer
+
+```http
+POST /api/interview/submit-answer
+```
+
+Authentication required.
+
+Example:
+
+```json
+{
+  "interviewId": "...",
+  "questionIndex": 0,
+  "answer": "My answer...",
+  "timeTaken": 42
+}
+```
+
+Returns AI feedback for the answer.
+
+---
+
+### Finish Interview
+
+```http
+POST /api/interview/finish
+```
+
+Example:
+
+```json
+{
+  "interviewId": "..."
+}
+```
+
+Returns:
+
+```json
+{
+  "finalScore": 8.2,
+  "confidence": 8.0,
+  "communication": 7.8,
+  "correctness": 8.6,
+  "questionWiseScore": []
+}
+```
+
+---
+
+### Interview History
+
+```http
+GET /api/interview/get-interview
+```
+
+Returns interviews belonging to the current user.
+
+---
+
+### Interview Report
+
+```http
+GET /api/interview/report/:id
+```
+
+Returns detailed analytics for a specific interview.
+
+---
+
+# Payment APIs
+
+### Create Razorpay Order
+
+```http
+POST /api/payment/order
+```
+
+Authentication required.
+
+---
+
+### Verify Payment
+
+```http
+POST /api/payment/verify
+```
+
+Authentication required.
+
+Verifies the Razorpay signature and adds credits after successful payment processing.
+
+---
+
+# 📁 Project Structure
