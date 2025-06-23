@@ -1068,3 +1068,181 @@ Verifies the Razorpay signature and adds credits after successful payment proces
 ---
 
 # 📁 Project Structure
+
+```text
+ai-hire-booster/
+│
+├── client/
+│   │
+│   ├── public/
+│   │
+│   ├── src/
+│   │   │
+│   │   ├── assets/
+│   │   │   ├── videos/
+│   │   │   │   ├── female-ai.mp4
+│   │   │   │   └── male-ai.mp4
+│   │   │   ├── HR.png
+│   │   │   ├── tech.png
+│   │   │   ├── resume.png
+│   │   │   ├── history.png
+│   │   │   └── ...
+│   │   │
+│   │   ├── components/
+│   │   │   ├── AuthModel.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Step1SetUp.jsx
+│   │   │   ├── Step2Interview.jsx
+│   │   │   ├── Step3Report.jsx
+│   │   │   └── Timer.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Auth.jsx
+│   │   │   ├── Home.jsx
+│   │   │   ├── InterviewPage.jsx
+│   │   │   ├── InterviewHistory.jsx
+│   │   │   ├── InterviewReport.jsx
+│   │   │   └── Pricing.jsx
+│   │   │
+│   │   ├── redux/
+│   │   │   ├── store.js
+│   │   │   └── userSlice.js
+│   │   │
+│   │   ├── utils/
+│   │   │   └── firebase.js
+│   │   │
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   │
+│   ├── package.json
+│   └── vite.config.js
+│
+├── server/
+│   │
+│   ├── config/
+│   │   ├── connectDb.js
+│   │   └── token.js
+│   │
+│   ├── controllers/
+│   │   ├── auth.controller.js
+│   │   ├── interview.controller.js
+│   │   ├── payment.controller.js
+│   │   └── user.controller.js
+│   │
+│   ├── middlewares/
+│   │   ├── isAuth.js
+│   │   └── multer.js
+│   │
+│   ├── models/
+│   │   ├── user.model.js
+│   │   ├── interview.model.js
+│   │   └── payment.model.js
+│   │
+│   ├── routes/
+│   │   ├── auth.route.js
+│   │   ├── interview.route.js
+│   │   ├── payment.route.js
+│   │   └── user.route.js
+│   │
+│   ├── services/
+│   │   ├── openRouter.service.js
+│   │   └── razorpay.service.js
+│   │
+│   ├── public/
+│   ├── index.js
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+# ⚙️ Local Development Setup
+
+## Prerequisites
+
+Install:
+
+* Node.js
+* npm
+* MongoDB or MongoDB Atlas account
+* Firebase project
+* OpenRouter account/API key
+* Razorpay account/test keys
+
+---
+
+## 1. Clone Repository
+
+```bash
+git clone https://github.com/iitian-gopu/ai-hire-booster.git
+cd ai-hire-booster
+```
+
+---
+
+# 2. Install Frontend Dependencies
+
+```bash
+cd client
+npm install
+```
+
+---
+
+# 3. Configure Frontend Environment Variables
+
+Create:
+
+```text
+client/.env
+```
+
+Add:
+
+```env
+VITE_FIREBASE_APIKEY=your_firebase_api_key
+VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
+```
+
+The Firebase project configuration currently contains the remaining Firebase application identifiers in `src/utils/firebase.js`.
+
+For a cleaner deployment setup, these values can also be moved entirely to environment variables.
+
+---
+
+# 4. Start Frontend
+
+```bash
+npm run dev
+```
+
+Vite normally starts on:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# 5. Install Backend Dependencies
+
+Open another terminal:
+
+```bash
+cd server
+npm install
+```
+
+---
+
+# 6. Configure Backend Environment Variables
+
+Create:
+
+```text
+server/.env
+```
+
