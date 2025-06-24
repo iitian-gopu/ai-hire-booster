@@ -1424,3 +1424,181 @@ Candidate Context
      ↓
 Five Personalized Questions
 ```
+
+### Answer evaluation
+
+```text
+Question + Candidate Answer
+     ↓
+Confidence
+Communication
+Correctness
+Final Score
+Feedback
+```
+
+---
+
+# 🪙 Credit Lifecycle
+
+```text
+New User
+   ↓
+100 Credits
+   ↓
+Start Interview
+   ↓
+Validate Credits >= 50
+   ↓
+Generate Questions
+   ↓
+Deduct 50 Credits
+   ↓
+Interview Created
+```
+
+For purchased credits:
+
+```text
+Credit Pack
+   ↓
+Razorpay Order
+   ↓
+Payment
+   ↓
+Signature Verification
+   ↓
+Credits Incremented
+```
+
+---
+
+# 📊 Interview Scoring
+
+For every answered question:
+
+```text
+Confidence      0–10
+Communication   0–10
+Correctness     0–10
+```
+
+AI returns a final question score.
+
+At interview completion:
+
+```text
+Overall Score =
+Sum of Question Scores
+──────────────────────
+Number of Questions
+```
+
+The platform separately calculates:
+
+```text
+Average Confidence
+
+Average Communication
+
+Average Correctness
+```
+
+These become the values displayed on the analytics dashboard.
+
+---
+
+# 📱 Application Pages
+
+## `/`
+
+Landing page containing the product introduction and entry points to interview preparation.
+
+## `/auth`
+
+Google authentication page.
+
+## `/interview`
+
+Three-stage interview workflow:
+
+```text
+Setup
+  ↓
+Interview
+  ↓
+Report
+```
+
+## `/history`
+
+Displays previous interviews and scores.
+
+## `/report/:id`
+
+Displays detailed analytics for a previous interview.
+
+## `/pricing`
+
+Displays credit packages and Razorpay purchasing flow.
+
+---
+
+# 🌍 Current Deployment Configuration
+
+The frontend code is configured to communicate with:
+
+```text
+https://interviewiqbackend-h6yh.onrender.com
+```
+
+The backend CORS configuration currently permits:
+
+```text
+https://ai-hire-booster.onrender.com
+```
+
+For production deployments, these should preferably be provided through environment variables rather than hard-coded URLs.
+
+---
+
+# 🔮 Suggested Roadmap
+
+Potential improvements for future versions include:
+
+* Firebase ID-token verification on the backend
+* Server-side payment plan configuration
+* Stronger interview ownership validation
+* Fully environment-based deployment configuration
+* OpenRouter structured-output validation
+* AI retry/fallback strategy
+* Additional LLM providers
+* Web Speech API compatibility fallback
+* Audio recording and replay
+* Webcam interview simulation
+* Behavioral interview scoring
+* STAR-method answer analysis
+* Resume ATS scoring
+* Job-description upload
+* Resume vs job-description matching
+* Dynamic follow-up questions
+* Adaptive question difficulty
+* System-design interview mode
+* Coding interview mode
+* DSA code editor
+* Real-time code execution
+* Company-specific interview preparation
+* Interview streaks and goals
+* Long-term performance trends
+* Admin analytics dashboard
+* Email reports
+* Rate limiting
+* Automated tests
+* Docker deployment
+* CI/CD pipeline
+* Redis caching
+* Background AI processing
+
+---
+
+# 💡 Future AI Interview Flow
