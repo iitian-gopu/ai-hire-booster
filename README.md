@@ -1246,3 +1246,181 @@ Create:
 server/.env
 ```
 
+Example:
+
+```env
+PORT=6000
+
+MONGODB_URL=mongodb+srv://username:password@cluster/database
+
+JWT_SECRET=your_secure_jwt_secret
+
+OPENROUTER_API_KEY=your_openrouter_api_key
+
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+```
+
+Never commit `.env` files or API secrets to Git.
+
+---
+
+# 7. Start Backend
+
+```bash
+npm run dev
+```
+
+Backend default port:
+
+```text
+6000
+```
+
+---
+
+# 🔧 Development Configuration Note
+
+The current code contains deployed frontend/backend origins directly in application code.
+
+Backend CORS currently targets the deployed frontend, while the frontend API URL targets the deployed backend.
+
+For local development, it is recommended to move these URLs to environment variables.
+
+Example frontend variable:
+
+```env
+VITE_API_URL=http://localhost:6000
+```
+
+Then:
+
+```javascript
+export const ServerUrl = import.meta.env.VITE_API_URL;
+```
+
+Backend example:
+
+```env
+CLIENT_URL=http://localhost:5173
+```
+
+Then configure CORS using:
+
+```javascript
+origin: process.env.CLIENT_URL
+```
+
+This makes the same codebase work cleanly across:
+
+```text
+development
+staging
+production
+```
+
+---
+
+# 📜 Available Frontend Commands
+
+From `/client`:
+
+```bash
+npm run dev
+```
+
+Start Vite development server.
+
+```bash
+npm run build
+```
+
+Create a production frontend build.
+
+```bash
+npm run lint
+```
+
+Run ESLint.
+
+```bash
+npm run preview
+```
+
+Preview the production build locally.
+
+---
+
+# 📜 Backend Commands
+
+From `/server`:
+
+```bash
+npm run dev
+```
+
+Starts the Express server using Nodemon.
+
+---
+
+# 🔐 Authentication Architecture
+
+Protected backend routes use JWT authentication middleware.
+
+```text
+Request
+   ↓
+Read JWT Cookie
+   ↓
+Verify JWT
+   ↓
+Extract userId
+   ↓
+Attach req.userId
+   ↓
+Protected Controller
+```
+
+The token lifetime is currently:
+
+```text
+7 days
+```
+
+Interview, user, and payment operations use authenticated backend routes.
+
+---
+
+# 🤖 AI Integration
+
+All LLM communication is centralized through:
+
+```text
+server/services/openRouter.service.js
+```
+
+The application currently uses:
+
+```text
+openai/gpt-4o-mini
+```
+
+through the OpenRouter Chat Completions API.
+
+The LLM is used for three primary tasks.
+
+### Resume understanding
+
+```text
+Resume Text
+     ↓
+Structured Candidate Profile
+```
+
+### Interview generation
+
+```text
+Candidate Context
+     ↓
+Five Personalized Questions
+```
