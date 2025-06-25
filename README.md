@@ -1602,3 +1602,181 @@ Potential improvements for future versions include:
 ---
 
 # 💡 Future AI Interview Flow
+
+A more advanced version could support adaptive interviews:
+
+```text
+Question
+   ↓
+Candidate Answer
+   ↓
+AI Evaluation
+   ↓
+Was Answer Strong?
+   │
+   ├── Yes → Harder Follow-Up
+   │
+   └── No → Clarification / Easier Follow-Up
+   ↓
+Continue Interview
+```
+
+This would make AI HireBooster behave more like a real interviewer instead of following a fixed five-question sequence.
+
+---
+
+# 🔒 Security Recommendations
+
+For production usage, consider implementing:
+
+* Firebase ID-token verification on the API
+* `httpOnly`, `secure`, and correctly configured SameSite cookies
+* interview ownership checks on all interview endpoints
+* server-controlled payment plans and prices
+* payment processing transactions/idempotency
+* request validation
+* strict PDF MIME/type validation
+* API rate limiting
+* centralized error handling
+* structured LLM response validation
+* secure HTTP headers
+* audit logging
+* production secret management
+
+---
+
+# 🧪 Testing Opportunities
+
+Recommended automated testing layers:
+
+### Unit Tests
+
+Test:
+
+* JWT utilities
+* score calculations
+* payment signature verification
+* resume transformation
+* validation helpers
+
+### API Integration Tests
+
+Test:
+
+```text
+Authentication
+Resume Upload
+Question Generation
+Answer Submission
+Interview Completion
+Interview History
+Payment Verification
+```
+
+### AI Contract Tests
+
+Validate that AI responses follow expected schemas:
+
+```json
+{
+  "confidence": 0,
+  "communication": 0,
+  "correctness": 0,
+  "finalScore": 0,
+  "feedback": "..."
+}
+```
+
+### End-to-End Tests
+
+A complete E2E test can verify:
+
+```text
+Login
+ → Configure Interview
+ → Upload Resume
+ → Generate Questions
+ → Submit Answers
+ → Finish Interview
+ → View Report
+```
+
+---
+
+# 📌 Why This Project Is Interesting
+
+AI HireBooster combines several real-world engineering areas in one full-stack application:
+
+```text
+Frontend Engineering
++
+Backend API Design
++
+Authentication
++
+MongoDB Data Modeling
++
+Generative AI
++
+Prompt Engineering
++
+PDF Processing
++
+Browser Speech APIs
++
+Payments
++
+Analytics
++
+PDF Reporting
++
+Cloud Deployment
+```
+
+The AI is not used as a standalone chatbot.
+
+It participates in a complete application workflow:
+
+```text
+Unstructured Resume
+        ↓
+Structured Candidate Context
+        ↓
+Personalized AI Questions
+        ↓
+Human Voice Answers
+        ↓
+AI Evaluation
+        ↓
+Structured Scores
+        ↓
+Persistent Analytics
+        ↓
+Actionable Interview Feedback
+```
+
+---
+
+# 👨‍💻 Author
+
+**Gopal Jaiswal**
+
+GitHub:
+https://github.com/iitian-gopu
+
+Repository:
+https://github.com/iitian-gopu/ai-hire-booster
+
+---
+
+# ⭐ Support
+
+If you find AI HireBooster useful or interesting, consider giving the repository a ⭐.
+
+Contributions, suggestions, bug reports, and feature ideas are welcome.
+
+---
+
+## AI HireBooster
+
+**Practice smarter. Understand your weaknesses. Perform better in real interviews.**
